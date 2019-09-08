@@ -11,7 +11,7 @@ mod header;
 mod memory_reserve_map;
 mod blob;
 mod property;
-mod node;
+pub mod node;
 mod stringlist;
 
 pub use property::{PropertyValue, IsValue};

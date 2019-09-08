@@ -31,6 +31,17 @@ impl<'a> Property<'a> {
 			Ok(BE::read_u32(self.value))
 		}
 	}
+
+        pub fn cell(&self, index : usize) -> Result<u32, &str> {
+                let end = size_of::<u32>() * (index + 1);
+
+		if self.value.len() < end {
+			Err("Parse error, property value to small to be parsed as u32")
+		} else {
+                        let start = size_of::<u32>() * index;
+			Ok(BE::read_u32(&self.value[start .. end]))
+		}
+        }
 	
 	pub fn as_str(&self) -> &'a str {
 		str::from_utf8(self.value).unwrap()
